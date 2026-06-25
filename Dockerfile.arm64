@@ -55,10 +55,11 @@ LABEL org.opencontainers.image.description="BindCraft for aarch64 + NVIDIA Black
 LABEL org.australian-protein-design-initiative.image.platforms="linux/arm64"
 
 ARG TARGETARCH
-# Pin the BindCraft repo + commit for reproducibility (matches the working tree this was built from).
-# Using the Australian-Protein-Design-Initiative fork, which adds prescreen_soft_iterations (commit 167951e).
+# Use the Australian-Protein-Design-Initiative fork (adds prescreen_soft_iterations and arm64
+# support on top of upstream martinpacesa/BindCraft). GIT_REF defaults to the branch tip (main);
+# override with a specific commit for a fully reproducible/pinned build.
 ARG GIT_REPO=https://github.com/Australian-Protein-Design-Initiative/BindCraft.git
-ARG GIT_REF=167951e
+ARG GIT_REF=main
 
 ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
