@@ -252,6 +252,15 @@ def perform_advanced_settings_check(advanced_settings, bindcraft_folder):
     elif isinstance(advanced_settings["omit_AAs"], str):
         advanced_settings["omit_AAs"] = advanced_settings["omit_AAs"].strip()
 
+    advanced_settings.setdefault("prescreen_soft_iterations", 50)
+
+    # prescreen_soft_iterations is carved out of the soft_iterations logit budget; if it meets or exceeds
+    # soft_iterations the additional logit optimisation sub-stage (e_soft=1.0) is skipped
+    if advanced_settings["design_algorithm"] == "4stage" and advanced_settings["prescreen_soft_iterations"] >= advanced_settings["soft_iterations"]:
+        print(f"WARNING: prescreen_soft_iterations ({advanced_settings['prescreen_soft_iterations']}) >= soft_iterations "
+              f"({advanced_settings['soft_iterations']}); the additional logits optimisation stage will be skipped "
+              f"and the effective logit budget is prescreen_soft_iterations.")
+
     return advanced_settings
 
 # Load settings from JSONs

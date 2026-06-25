@@ -1,6 +1,14 @@
 # BindCraft
 ![alt text](https://github.com/martinpacesa/BindCraft/blob/main/pipeline.png?raw=true)
 
+> Forked from the original at [martinpacesa/BindCraft](https://github.com/martinpacesa/BindCraft).
+
+## Changes compared to upstream BindCraft
+
+- Added ability to change the default number of prescreening iterations in Stage 1 (advanced setting `prescreen_soft_iterations`).
+
+----
+
 Simple binder design pipeline using AlphaFold2 backpropagation, MPNN, and PyRosetta. Select your target and let the script do the rest of the work and finish once you have enough designs to order!
 
 [Preprint link for BindCraft](https://www.biorxiv.org/content/10.1101/2024.09.30.615802)
@@ -78,6 +86,7 @@ predict_initial_guess           -> Introduce bias by providing binder atom posit
 predict_bigbang                 -> Introduce atom position bias into the structure module for atom initilisation. Recommended if target and design are large (more than 600 amino acids).
 
 # Design iterations
+prescreen_soft_iterations            -> number of initial logit iterations used to prescreen the trajectory in "Stage 1: Test Logits". Total iterations in Stage 1 = soft_iterations. If soft_iterations - prescreen_soft_iterations <= 0, then the additional logits optimisation stage (e_soft=1.0, ramp_recycles=False) will be skipped.
 soft_iterations                 -> number of soft iterations (all amino acids considered at all positions)
 temporary_iterations            -> number of temporary iterations (softmax, most probable amino acids considered at all positions)
 hard_iterations                 -> number of hard iterations (one hot encoding, single amino acids considered at all positions)

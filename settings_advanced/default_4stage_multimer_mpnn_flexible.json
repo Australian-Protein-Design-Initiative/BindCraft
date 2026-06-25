@@ -10,6 +10,7 @@
     "rm_template_sc_predict": false,
     "predict_initial_guess": false,
     "predict_bigbang": false,
+    "prescreen_soft_iterations": 50,
     "soft_iterations": 75,
     "temporary_iterations": 45,
     "hard_iterations": 5,
